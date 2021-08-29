@@ -253,6 +253,12 @@ async def sen(client, message : Message):
 
     await message.reply("Cleared!")
 
+@app.on_message(filters.command("gg"))
+async def gen(client, message : Message):
+    files = os.listdir(os.getcwd())
+    print(files)
+
+
 
 async def run_bot():
     await app.start()
