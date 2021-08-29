@@ -249,7 +249,9 @@ async def story_download(client, message : Message):
 async def sen(client, message : Message):
     for file in os.listdir("downloads"):
 
-        os.remove(file)
+        os.remove(f"downloads/{file}")
+
+    await message.reply("Cleared!")
 
 
 async def run_bot():
