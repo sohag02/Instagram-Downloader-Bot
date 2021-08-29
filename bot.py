@@ -138,7 +138,7 @@ async def post_download(client, message : Message):
         insta.download_post(post, "downloads")
 
         list = os.listdir("downloads")
-        path = ""
+        path = r""
         for file in list:
             if file.endswith(".jpg"):
                 path = f"downloads\{file}"
