@@ -245,10 +245,11 @@ async def story_download(client, message : Message):
 
 
 
-@app.on_message(filters.command("gg"))
+@app.on_message(filters.command("cc"))
 async def sen(client, message : Message):
-    await app.send(cmd_data)
-    # await message.reply_video("downloads/2021-08-26_05-37-03_UTC.mp4")
+    for file in os.listdir("downloads"):
+
+        os.remove(file)
 
 
 async def run_bot():
