@@ -130,7 +130,7 @@ async def post_download(client, message : Message):
         return
 
     try:
-        insta.login(user="unknown.s.mac", passwd="Sohag@02")
+        insta.login(user=Config.INSTA_USER, passwd=Config.INSTA_PASS)
         a = url.replace("https://www.instagram.com/p/", "")
         b = a.split("/")
         post_id = b[0]#url#a[ : 11]
@@ -219,7 +219,7 @@ async def story_download(client, message : Message):
     else:
         username = u
 
-    insta.login(user="unknown.s.mac", passwd="Sohag@02")
+    insta.login(user=Config.INSTA_USER, passwd=Config.INSTA_PASS)
     profile = Profile.from_username(insta.context, username)
 
     folder = f"{profile.username}"
