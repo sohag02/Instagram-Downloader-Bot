@@ -39,7 +39,7 @@ cmd_data = SetBotCommands(commands=cmd)
 
 
 insta = Instaloader()
-insta.login(user=Config.INSTA_USER, passwd=Config.INSTA_PASS)
+# insta.login(user=Config.INSTA_USER, passwd=Config.INSTA_PASS)
 
 def joined():
 
@@ -270,6 +270,7 @@ async def gen(client, message : Message):
 async def run_bot():
     await app.start()
     await app.send(cmd_data)
+    insta.login(user=Config.INSTA_USER, passwd=Config.INSTA_PASS)
     print("Bot Started")
     await idle()
 
