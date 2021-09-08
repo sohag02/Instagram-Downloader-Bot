@@ -39,6 +39,7 @@ cmd_data = SetBotCommands(commands=cmd)
 
 
 insta = Instaloader()
+insta.login(user=Config.INSTA_USER, passwd=Config.INSTA_PASS)
 
 def joined():
 
@@ -96,7 +97,7 @@ async def stats(client, message : Message):
 
 
 @app.on_message(filters.command("broadcast") & filters.reply)
-async def stats(client, message : Message):
+async def broadcast(client, message : Message):
     users = await Data.get_user_ids()
     tmsg = message.reply_to_message.text.markdown
 
@@ -130,8 +131,14 @@ async def post_download(client, message : Message):
         return
 
     try:
-        insta.login(user=Config.INSTA_USER, passwd=Config.INSTA_PASS)
-        a = url.replace("https://www.instagram.com/p/", "")
+        # insta.login(user=Config.INSTA_USER, passwd=Config.INSTA_PASS)
+        if "https://www.instagram.com/p/" in url:
+            a = url.replace("https://www.instagram.com/p/", "")
+            ext = ".jpg"
+        elif "https://www.instagram.com/reel/" in url:
+            a = url.replace("https://www.instagram.com/reel/", "")
+            ext = ".mp4"
+
         b = a.split("/")
         post_id = b[0]#url#a[ : 11]
         post = Post.from_shortcode(insta.context, post_id)
@@ -140,7 +147,7 @@ async def post_download(client, message : Message):
         list = os.listdir("downloads")
         path = r""
         for file in list:
-            if file.endswith(".jpg"):
+            if file.endswith(ext):
                 path = f"downloads\{file}"
                 break
             else:
@@ -219,7 +226,7 @@ async def story_download(client, message : Message):
     else:
         username = u
 
-    insta.login(user=Config.INSTA_USER, passwd=Config.INSTA_PASS)
+    # insta.login(user=Config.INSTA_USER, passwd=Config.INSTA_PASS)
     profile = Profile.from_username(insta.context, username)
 
     folder = f"{profile.username}"

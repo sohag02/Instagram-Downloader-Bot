@@ -1,12 +1,14 @@
 import motor.motor_asyncio
 from config import Config
+from pymongo import MongoClient
 from pymongo.collection import Collection
 from pymongo.database import Database
+# import ssl
 
-mongo = motor.motor_asyncio.AsyncIOMotorClient(Config.MONGO)
+mongo = motor.motor_asyncio.AsyncIOMotorClient(Config.MONGO)#, ssl_cert_reqs=ssl.CERT_NONE)
 
 db : Database = mongo["SJBots"]
-users : Collection = db["RemoveBGBot"]
+users : Collection = db["Instagram Bot"]
 
 
 class Data:
