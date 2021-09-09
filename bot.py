@@ -159,7 +159,8 @@ async def post_download(client, message : Message):
 
 
         for file in os.listdir("downloads"):
-            os.remove(f"downloads/{file}")
+            if not file.endswith(".gitkeep"):
+                os.remove(f"downloads/{file}")
     except BadResponseException: 
         await msg.edit("The post link is invalid")
     except:
@@ -208,7 +209,7 @@ async def dp_download(client, message : Message):
 
 
 
-@app.on_message(filters.command("story"))
+@app.on_message(filters.command("??story"))
 @joined()
 async def story_download(client, message : Message):
     msg = await message.reply("Processing...")
@@ -270,7 +271,7 @@ async def gen(client, message : Message):
 async def run_bot():
     await app.start()
     await app.send(cmd_data)
-    insta.login(user=Config.INSTA_USER, passwd=Config.INSTA_PASS)
+    # insta.login(user=Config.INSTA_USER, passwd=Config.INSTA_PASS)
     print("Bot Started")
     await idle()
 
